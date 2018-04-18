@@ -21,7 +21,8 @@ function getHashTags(inputText) {
 const instances = [
   { host: 'mastodon.social' },
   { host: 'photog.social' },
-  { host: 'vis.social' }
+  { host: 'vis.social' },
+  { host: 'hcxp.co' }
 ]
 
 instances.forEach((instance) => {
