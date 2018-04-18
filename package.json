@@ -14,5 +14,8 @@
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "start": "node listener.js"
   }
 }
