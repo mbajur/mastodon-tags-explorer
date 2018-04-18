@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title MastodonTagsExplorer
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css', media: 'all'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    nav(class="navbar is-light" role="navigation" aria-label="main navigation")
+      div(class="container")
+        div(class="navbar-brand")
+          a(href="/" class="navbar-item") Mastodon Tags Explorer
+
+        div(class="navbar-menu")
+          div(class="navbar-end")
+            a(href=tags_path class="navbar-item") Tags
+            a(href=instances_path class="navbar-item") Instances
+
+    .container
+      .columns
+        .column.is-8.is-offset-2
+          = yield

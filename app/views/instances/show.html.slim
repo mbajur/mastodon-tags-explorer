@@ -1,0 +1,22 @@
+.columns.is-marginless
+  .column
+    div
+      h1.title.is-2
+        | #{@instance.host}
+
+  .column
+    .level
+      .level-item.has-text-centered
+        div
+          p.heading Tagged toots
+          p.title = @instance.toots.count
+
+      .level-item.has-text-centered
+        div
+          p.heading Tags
+          p.title = @instance.tags.count
+
+hr
+
+- @tags.each do |tag|
+  = render partial: 'tags/tag', locals: { tag: tag }

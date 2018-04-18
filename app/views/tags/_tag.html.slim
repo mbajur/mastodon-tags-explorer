@@ -1,0 +1,17 @@
+a.box(href=tag_path(tag))
+  .columns
+    .column
+      h3.title.is-4
+        | ##{tag.name}
+
+    .column
+      .level
+        .level-item.has-text-centered
+          div
+            p.heading Toots
+            p.title = tag.taggings_count
+
+        .level-item.has-text-centered
+          div
+            p.heading Instances
+            p.title 225

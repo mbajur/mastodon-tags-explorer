@@ -1,0 +1,18 @@
+{
+  "name": "mastodon-tags-explorer",
+  "private": true,
+  "dependencies": {
+    "@alienfast/sidekiq-client": "^1.0.4",
+    "@rails/webpacker": "3.4",
+    "html2plaintext": "^2.0.1",
+    "redis": "^2.8.0",
+    "sidekiq": "^1.1.1",
+    "vue": "^2.5.16",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.5.16",
+    "ws": "^5.1.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

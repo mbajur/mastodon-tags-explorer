@@ -1,0 +1,25 @@
+h1.title Known instances
+
+.level
+  .level-left
+    p.level-item
+      strong Sort by:
+    p.level-item
+      a(href="#") Popularity
+    p.level-item
+      a(href="#") Name
+
+  .level-right
+    .level-item
+      .field.has-addons
+        p.control
+          input.input(placeholder="Search a tag...")
+        p.control
+          button.button Search
+
+- @instances.each_slice(2) do |chunk|
+  .columns
+    - chunk.each do |instance|
+      .column
+        = render instance
+

@@ -1,0 +1,44 @@
+.columns.is-marginless
+  .column
+    h1.title.is-2
+      | ##{@tag.name}
+
+  .column
+    .level
+      .level-item.has-text-centered
+        div
+          p.heading Toots
+          p.title = @tag.taggings_count
+
+      .level-item.has-text-centered
+        div
+          p.heading Instances
+          p.title 225
+
+hr
+
+.has-text-centered.mb-2
+  h2.title.is-3 Trends
+  p.subtitle tag usage over time
+
+= column_chart @tag.taggings.group_by_day(:created_at, format: "%a").count
+
+hr
+
+.has-text-centered.mb-2
+  h2.title.is-3 Top instances
+  p.subtitle with highest usage of ##{@tag.name} hashtag
+
+- @instances.each_slice(2) do |chunk|
+  .columns
+    - chunk.each do |instance|
+      .column
+        = render instance
+
+hr
+
+.has-text-centered.mb-2
+  h2.title.is-3 Top languages
+  p.subtitle used in toots tagged with ##{@tag.name}
+
+= pie_chart Toot.tagged_with(names: [@tag.name]).where.not(language: nil).group(:language).count, legend: 'bottom'
