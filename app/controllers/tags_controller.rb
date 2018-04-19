@@ -1,8 +1,8 @@
 class TagsController < ApplicationController
   def index
-    @tags = Gutentag::Tag.all
-                         .order(taggings_count: :desc)
-                         .page(params[:page])
+    @tags = TrendingTag.order_by_popularity
+                       .where('taggings_count > 10')
+                       .page(params[:page])
   end
 
   def popular
@@ -17,7 +17,7 @@ class TagsController < ApplicationController
                          .order(name: :asc)
                          .page(params[:page])
 
-    @tags = @tags.where('name LIKE ?', "%#{params[:q]}%") if params[:q]
+    @tags = @tags.where('name LIKE ?', "%#{params[:q].downcase}%") if params[:q]
 
     render :index
   end

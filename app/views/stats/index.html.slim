@@ -1,0 +1,40 @@
+h1.title.has-text-centered Global stats
+
+hr
+
+.level
+  .level-item.has-text-centered
+    div
+      p.heading Tags
+      p.title = Gutentag::Tag.all.count
+
+  .level-item.has-text-centered
+    div
+      p.heading Toots processed
+      p.title = Toot.all.count
+
+  .level-item.has-text-centered
+    div
+      p.heading Instances
+      p.title = Instance.all.count
+
+hr
+
+.has-text-centered.mb-2
+  p.subtitle Tags processed
+
+= area_chart Gutentag::Tag.all.group_by_day(:created_at, format: "%a").count
+
+hr
+
+.has-text-centered.mb-2
+  p.subtitle Toots processed
+
+= area_chart Toot.all.group_by_day(:created_at, format: "%a").count
+
+hr
+
+.has-text-centered.mb-2
+  p.subtitle New instances
+
+= area_chart Instance.all.group_by_day(:created_at, format: "%a").count

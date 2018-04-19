@@ -3,7 +3,10 @@ const h2p = require('html2plaintext');
 const redis = require('redis');
 const Sidekiq = require('sidekiq');
 
-redisClient = redis.createClient('redis://redis:6379');
+let redisUrl = process.env.REDIS_URL || 'redis://localhost:6379'
+console.log('Redis URL:', redisUrl)
+
+redisClient = redis.createClient(redisUrl);
 sidekiq = new Sidekiq(redisClient);
 
 function getHashTags(inputText) {

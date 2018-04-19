@@ -6,9 +6,12 @@ Rails.application.routes.draw do
 
   root to: 'tags#index'
 
+  get :stats, to: 'stats#index'
+
   resources :tags do
     get :popular, on: :collection
     get :all, on: :collection
   end
+
   resources :instances
 end

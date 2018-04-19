@@ -39,10 +39,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'gutentag', '~> 2.3'
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem 'slim-rails'
 gem 'kaminari'
 gem 'chartkick'
 gem 'groupdate'
+gem 'scenic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

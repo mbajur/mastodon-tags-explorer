@@ -1,0 +1,4 @@
+:schedule:
+  feeds_scrapper:
+    cron: '0 * * * * *'   # Runs once per minute
+    class: RefreshTrendingTagsWorker

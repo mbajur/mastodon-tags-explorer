@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_102349) do
+ActiveRecord::Schema.define(version: 2018_04_19_143908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,4 +52,22 @@ ActiveRecord::Schema.define(version: 2018_04_17_102349) do
   end
 
   add_foreign_key "toots", "instances"
+
+  create_view "trending_tags", materialized: true,  sql_definition: <<-SQL
+      SELECT DISTINCT gutentag_tags.id,
+      gutentag_tags.name,
+      gutentag_tags.created_at,
+      gutentag_tags.updated_at,
+      gutentag_tags.taggings_count,
+      ( SELECT count(*) AS count
+             FROM gutentag_taggings gutentag_taggings_1
+            WHERE ((gutentag_taggings_1.tag_id = gutentag_tags.id) AND (gutentag_taggings_1.created_at > (now() - '03:00:00'::interval)))) AS count_current,
+      ( SELECT count(*) AS count
+             FROM gutentag_taggings gutentag_taggings_1
+            WHERE ((gutentag_taggings_1.tag_id = gutentag_tags.id) AND (gutentag_taggings_1.created_at <= ((now())::timestamp without time zone - '03:00:00'::interval)) AND (gutentag_taggings_1.created_at > ((now())::timestamp without time zone - '12:00:00'::interval)))) AS count_old
+     FROM (gutentag_tags
+       LEFT JOIN gutentag_taggings ON ((gutentag_tags.id = gutentag_taggings.tag_id)))
+    WHERE ((gutentag_taggings.created_at >= ((now())::timestamp without time zone - '12:00:00'::interval)) AND (gutentag_tags.taggings_count > 5));
+  SQL
+
 end

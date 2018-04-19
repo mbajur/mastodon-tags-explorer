@@ -18,14 +18,6 @@
 hr
 
 .has-text-centered.mb-2
-  h2.title.is-3 Trends
-  p.subtitle tag usage over time
-
-= column_chart @tag.taggings.group_by_day(:created_at, format: "%a").count
-
-hr
-
-.has-text-centered.mb-2
   h2.title.is-3 Top instances
   p.subtitle with highest usage of ##{@tag.name} hashtag
 
@@ -37,8 +29,17 @@ hr
 
 hr
 
-.has-text-centered.mb-2
-  h2.title.is-3 Top languages
-  p.subtitle used in toots tagged with ##{@tag.name}
+.columns
+  .column.is-6
+    .has-text-centered.mb-2
+      h2.title.is-4 Trends
+      p.subtitle tag usage over time
 
-= pie_chart Toot.tagged_with(names: [@tag.name]).where.not(language: nil).group(:language).count, legend: 'bottom'
+    = column_chart @tag.taggings.group_by_day(:created_at, format: "%a").count
+
+  .column.is-6
+    .has-text-centered.mb-2
+      h2.title.is-4 Top languages
+      p.subtitle used in toots tagged with ##{@tag.name}
+
+    = pie_chart Toot.tagged_with(names: [@tag.name]).where.not(language: nil).group(:language).count, legend: 'bottom'
