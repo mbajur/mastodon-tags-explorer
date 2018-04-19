@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_19_143908) do
+ActiveRecord::Schema.define(version: 2018_04_19_204844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_04_19_143908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "taggings_count", default: 0, null: false
+    t.integer "instances_count", default: 0
     t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
     t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_04_19_143908) do
       gutentag_tags.created_at,
       gutentag_tags.updated_at,
       gutentag_tags.taggings_count,
+      gutentag_tags.instances_count,
       ( SELECT count(*) AS count
              FROM gutentag_taggings gutentag_taggings_1
             WHERE ((gutentag_taggings_1.tag_id = gutentag_tags.id) AND (gutentag_taggings_1.created_at > (now() - '03:00:00'::interval)))) AS count_current,

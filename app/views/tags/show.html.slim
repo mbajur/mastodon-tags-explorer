@@ -13,7 +13,7 @@
       .level-item.has-text-centered
         div
           p.heading Instances
-          p.title 225
+          p.title = @instances_count
 
 hr
 
@@ -24,7 +24,7 @@ hr
 - @instances.each_slice(2) do |chunk|
   .columns
     - chunk.each do |instance|
-      .column
+      .column.is-6
         = render instance
 
 hr
@@ -35,7 +35,8 @@ hr
       h2.title.is-4 Trends
       p.subtitle tag usage over time
 
-    = column_chart @tag.taggings.group_by_day(:created_at, format: "%a").count
+    = column_chart @tag.taggings.group_by_day(:created_at, format: "%a").count, height: 10
+    = area_chart @tag.taggings.where('created_at >= ?', DateTime.now - 20.hours).group_by_hour(:created_at).count, height: 10
 
   .column.is-6
     .has-text-centered.mb-2

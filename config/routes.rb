@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     get :all, on: :collection
   end
 
-  resources :instances
+  resources :instances do
+    get :alphabetical, on: :collection
+  end
 end

@@ -24,8 +24,15 @@ class TagsController < ApplicationController
 
   def show
     @tag = Gutentag::Tag.find(params[:id])
-    @instances = Instance.where(
+    @instances_count = Instance.where(
       id: Toot.tagged_with(names: [@tag.name]).select(:instance_id)
-    ).limit(6)
+    ).count
+
+    @instances = Instance.all
+                         .left_joins(:tags)
+                         .group(:id)
+                         .order('COUNT(gutentag_tags.id) DESC')
+                         .where('gutentag_tags.name = ?', @tag.name)
+                         .limit(6)
   end
 end
