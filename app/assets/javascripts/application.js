@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require Chart.bundle
 //= require chartkick
+//= require google-analytics-turbolinks
 //= require_tree .

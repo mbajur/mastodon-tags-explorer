@@ -1,5 +1,7 @@
 class InstancesController < ApplicationController
   def index
+    @page_title = 'Popular instances'
+
     @instances = Instance.all
                          .left_joins(:tags)
                          .group(:id)
@@ -9,6 +11,8 @@ class InstancesController < ApplicationController
   end
 
   def alphabetical
+    @page_title = 'All instances'
+
     @instances = Instance.all
                          .order(host: :asc)
 
@@ -21,6 +25,10 @@ class InstancesController < ApplicationController
 
   def show
     @instance = Instance.find_by!(host: params[:id])
+
+    @page_title = @instance.host
+    @page_description = "#{@instance.host} statistics on Mastodon Tags Explorer"
+
     @tags = @instance.tags
                      .order(taggings_count: :desc)
                      .distinct

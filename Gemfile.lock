@@ -24,6 +24,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
     activejob (5.2.0)
       activesupport (= 5.2.0)
       globalid (>= 0.3.6)
@@ -42,6 +45,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     bindex (0.5.0)
     bootsnap (1.3.0)
@@ -63,9 +68,12 @@ GEM
     et-orbi (1.1.0)
       tzinfo
     execjs (2.7.0)
+    faraday (0.15.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    google-analytics-turbolinks (0.0.5)
     groupdate (4.0.0)
       activesupport (>= 4.2)
     gutentag (2.3.1)
@@ -98,6 +106,8 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
+    meta-tags (2.9.0)
+      actionpack (>= 3.2.0, < 5.3)
     method_source (0.9.0)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
@@ -105,6 +115,8 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
+    newrelic_rpm (5.0.0.342)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -113,6 +125,7 @@ GEM
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
+    public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.4)
     rack-protection (2.0.1)
@@ -167,6 +180,8 @@ GEM
     scenic (1.4.1)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
+    sentry-raven (2.7.2)
+      faraday (>= 0.7.6, < 1.0)
     sidekiq (5.1.1)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -224,21 +239,26 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   bootsnap (>= 1.1.0)
   byebug
   chartkick
   coffee-rails (~> 4.2)
+  google-analytics-turbolinks
   groupdate
   gutentag (~> 2.3)
   jbuilder (~> 2.5)
   kaminari
   listen (>= 3.0.5, < 3.2)
+  meta-tags
+  newrelic_rpm
   pg (>= 0.18, < 2.0)
   pg_search
   puma (~> 3.11)
   rails (~> 5.2.0)
   sass-rails (~> 5.0)
   scenic
+  sentry-raven
   sidekiq
   sidekiq-scheduler
   slim-rails

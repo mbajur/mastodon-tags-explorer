@@ -1,9 +1,12 @@
 doctype html
 html
   head
-    title MastodonTagsExplorer
+    = display_meta_tags site: 'Mastodon Tags Explorer'
+
     = csrf_meta_tags
     = csp_meta_tag
+
+    = render 'layouts/ga'
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css', media: 'all'
@@ -13,15 +16,27 @@ html
     nav(class="navbar is-light" role="navigation" aria-label="main navigation")
       div(class="container")
         div(class="navbar-brand")
-          a(href="/" class="navbar-item") Mastodon Tags Explorer
+          a(href="/" class="navbar-item")
+            | Mastodon Tags Explorer
+            .tag.is-danger.is-small(style="margin-left: 0.5rem;") Beta
+
+          a(role="button" class="navbar-burger" aria-label="menu" aria-expanded="false")
+            span aria-hidden="true"
+            span aria-hidden="true"
+            span aria-hidden="true"
 
         div(class="navbar-menu")
           div(class="navbar-end")
-            a(href=tags_path class="navbar-item") Tags
-            a(href=instances_path class="navbar-item") Instances
-            a(href=stats_path class="navbar-item") Stats
+            = active_link_to 'Tags', tags_path, class: 'navbar-item', class_active: 'is-active'
+            = active_link_to 'Instances', instances_path, class: 'navbar-item', class_active: 'is-active'
+            = active_link_to 'Stats', stats_path, class: 'navbar-item', class_active: 'is-active'
 
     .container
       .columns
         .column.is-8.is-offset-2
           = yield
+
+    footer.footer(style="margin-top: 2rem")
+      .container
+        .content.has-text-centered
+          | <strong>Mastodon Tags Explorer</strong> by <a href="https://hcxp.co/@mb">@mb</a> • <a href="https://mastodon.social/@tagsexplorer">@tagsexplorer</a> • <a href="https://github.com/mbajur/mastodon-tags-explorer">Source code</a>

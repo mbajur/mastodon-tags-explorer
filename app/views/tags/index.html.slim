@@ -2,14 +2,12 @@ h1.title Known tags
 
 .level
   .level-left
-    p.level-item
-      = link_to 'Trending', tags_path
-    p.level-item
-      = link_to 'Popular', popular_tags_path
-    p.level-item
-      = link_to 'Broad', broad_tags_path
-    p.level-item
-      = link_to 'All', all_tags_path
+    .tabs
+      ul
+        = active_link_to 'Trending', tags_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+        = active_link_to 'Popular', popular_tags_path, class_active: 'is-active', wrap_tag: :li
+        = active_link_to 'Broad', broad_tags_path, class_active: 'is-active', wrap_tag: :li
+        = active_link_to 'All', all_tags_path, class_active: 'is-active', wrap_tag: :li
 
   .level-right
     .level-item

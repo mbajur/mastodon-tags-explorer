@@ -25,7 +25,7 @@ hr
   .columns
     - chunk.each do |instance|
       .column.is-6
-        = render instance
+        = render instance, tag_context: @tag
 
 hr
 

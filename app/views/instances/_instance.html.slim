@@ -1,5 +1,11 @@
+- tag_context ||= nil
+
 .box
   h5.title.is-5
     = link_to instance.host, instance_path(instance.host)
 
-  a.button.is-small See toots &rarr;
+  - if tag_context.present?
+    a.button.is-small(
+      href="https://#{instance.host}/web/timelines/tag/#{tag_context.name}"
+      target="_blank"
+    ) See toots &rarr;

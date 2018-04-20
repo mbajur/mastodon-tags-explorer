@@ -18,6 +18,10 @@ nav {
   margin-bottom: 2rem;
 }
 
+nav .container {
+  max-width: 750px;
+}
+
 .mb-2 {
   margin-bottom: 2rem;
 }

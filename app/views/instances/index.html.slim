@@ -2,12 +2,10 @@ h1.title Known instances
 
 .level
   .level-left
-    p.level-item
-      strong Sort by:
-    p.level-item
-      = link_to 'Popularity', instances_path
-    p.level-item
-      = link_to 'Name', alphabetical_instances_path
+    .tabs
+      ul
+        = active_link_to 'Popular', instances_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+        = active_link_to 'Alphabetical', alphabetical_instances_path, class_active: 'is-active', wrap_tag: :li
 
   .level-right
     .level-item
