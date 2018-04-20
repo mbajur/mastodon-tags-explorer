@@ -2,21 +2,24 @@ h1.title.has-text-centered Global stats
 
 hr
 
-.level
+.level(data-controller="stats-counters")
   .level-item.has-text-centered
     div
       p.heading Tags
-      p.title = Gutentag::Tag.all.count
+      p.title(data-target="stats-counters.tagsCount")
+        = @tags_count
 
   .level-item.has-text-centered
     div
       p.heading Toots processed
-      p.title = Toot.all.count
+      p.title(data-target="stats-counters.tootsCount")
+        = @toots_count
 
   .level-item.has-text-centered
     div
       p.heading Instances
-      p.title = Instance.all.count
+      p.title(data-target="stats-counters.instancesCount")
+        = @instances_count
 
 hr
 
