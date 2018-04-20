@@ -1,7 +1,9 @@
 doctype html
 html
   head
-    = display_meta_tags site: 'Mastodon Tags Explorer'
+    = display_meta_tags title: 'Mastodon Tags Explorer'
+
+    meta(name="viewport" content="width=device-width, initial-scale=1")
 
     = csrf_meta_tags
     = csp_meta_tag
@@ -11,21 +13,22 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css', media: 'all'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application'
 
   body
-    nav(class="navbar is-light" role="navigation" aria-label="main navigation")
+    nav(class="navbar is-light" role="navigation" aria-label="main navigation" data-controller="navbar")
       div(class="container")
         div(class="navbar-brand")
           a(href="/" class="navbar-item")
             | Mastodon Tags Explorer
             .tag.is-danger.is-small(style="margin-left: 0.5rem;") Beta
 
-          a(role="button" class="navbar-burger" aria-label="menu" aria-expanded="false")
+          a(role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="click->navbar#toggleMenu")
             span aria-hidden="true"
             span aria-hidden="true"
             span aria-hidden="true"
 
-        div(class="navbar-menu")
+        div(class="navbar-menu" data-target="navbar.menu")
           div(class="navbar-end")
             = active_link_to 'Tags', tags_path, class: 'navbar-item', class_active: 'is-active'
             = active_link_to 'Instances', instances_path, class: 'navbar-item', class_active: 'is-active'

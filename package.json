@@ -7,9 +7,7 @@
     "html2plaintext": "^2.0.1",
     "redis": "^2.8.0",
     "sidekiq": "^1.1.1",
-    "vue": "^2.5.16",
-    "vue-loader": "^14.2.2",
-    "vue-template-compiler": "^2.5.16",
+    "stimulus": "^1.0.1",
     "ws": "^5.1.1"
   },
   "devDependencies": {

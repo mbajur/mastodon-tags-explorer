@@ -5,13 +5,13 @@ a.box(href=tag_path(tag.name))
         | ##{tag.name}
 
     .column
-      .level
-        .level-item.has-text-centered
+      .level.is-mobile
+        .level-item.has-text-centered.is-6
           div
             p.heading Toots
             p.title = tag.taggings_count
 
-        .level-item.has-text-centered
+        .level-item.has-text-centered.is-6
           div
             p.heading Instances
             p.title = tag.instances_count
