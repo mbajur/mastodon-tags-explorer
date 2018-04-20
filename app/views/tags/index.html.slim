@@ -21,4 +21,4 @@ h1.title Known tags
 - @tags.each do |tag|
   = render partial: 'tags/tag', locals: { tag: tag }
 
-= paginate @tags
+= paginate @tags if defined? @tags.total_pages

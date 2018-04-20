@@ -3,8 +3,7 @@ class TagsController < ApplicationController
     @page_title = 'Trending tags'
     @tags = TrendingTag.order_by_popularity
                        .where('taggings_count > 10')
-                       .limit(25)
-                       .page(params[:page])
+                       .first(25)
   end
 
   def popular
