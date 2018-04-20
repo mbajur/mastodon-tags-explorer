@@ -12,6 +12,13 @@ class TagsController < ApplicationController
     render :index
   end
 
+  def broad
+    @tags = Gutentag::Tag.all
+                         .order(instances_count: :desc)
+                         .page(params[:page])
+    render :index
+  end
+
   def all
     @tags = Gutentag::Tag.all
                          .order(name: :asc)
@@ -23,7 +30,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tag = Gutentag::Tag.find(params[:id])
+    @tag = Gutentag::Tag.find_by!(name: params[:id])
     @instances_count = Instance.where(
       id: Toot.tagged_with(names: [@tag.name]).select(:instance_id)
     ).count

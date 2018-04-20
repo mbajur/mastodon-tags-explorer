@@ -4,23 +4,26 @@ class InstancesController < ApplicationController
                          .left_joins(:tags)
                          .group(:id)
                          .order('COUNT(gutentag_tags.id) DESC')
-                         .page(params[:page])
-                         .per(26)
+
+    @instances = @instances.page(params[:page]).per(26)
   end
 
   def alphabetical
     @instances = Instance.all
                          .order(host: :asc)
-                         .page(params[:page])
-                         .per(26)
+
+    @instances = @instances.search(params[:q]) if params[:q].present?
+
+    @instances = @instances.page(params[:page]).per(26)
 
     render :index
   end
 
   def show
-    @instance = Instance.find(params[:id])
+    @instance = Instance.find_by!(host: params[:id])
     @tags = @instance.tags
                      .order(taggings_count: :desc)
-                     .uniq
+                     .distinct
+                     .page(params[:page])
   end
 end

@@ -10,10 +10,11 @@ Rails.application.routes.draw do
 
   resources :tags do
     get :popular, on: :collection
+    get :broad, on: :collection
     get :all, on: :collection
   end
 
-  resources :instances do
+  resources :instances, constraints: { id: /.*/ } do
     get :alphabetical, on: :collection
   end
 end

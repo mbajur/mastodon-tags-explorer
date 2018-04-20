@@ -11,11 +11,12 @@ h1.title Known instances
 
   .level-right
     .level-item
-      .field.has-addons
-        p.control
-          input.input(placeholder="Search a tag...")
-        p.control
-          button.button Search
+      = form_tag alphabetical_instances_path, method: :get do
+        .field.has-addons
+          p.control
+            input.input(placeholder="Search a tag..." name="q" value=params[:q])
+          p.control
+            button.button Search
 
 - @instances.each_slice(2) do |chunk|
   .columns
