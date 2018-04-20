@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["tagsCount", "tootsCount", "instancesCount"]
 
   connect() {
-    // this.load()
     this.startRefreshing()
   }
 
@@ -13,7 +12,10 @@ export default class extends Controller {
       .then(response => response.text())
       .then(resp => {
         let json = JSON.parse(resp)
+
         this.tagsCountTarget.innerHTML = json.tags_count
+        this.tootsCountTarget.innerHTML = json.toots_count
+        this.instancesCountTarget.innerHTML = json.instances_count
       })
   }
 
