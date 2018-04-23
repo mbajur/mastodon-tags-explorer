@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :instances, constraints: { id: /.*/ } do
     get :alphabetical, on: :collection
   end
+
+  resources :languages, only: [:index, :show]
 end

@@ -95,6 +95,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    language_list (1.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -249,6 +250,7 @@ DEPENDENCIES
   gutentag (~> 2.3)
   jbuilder (~> 2.5)
   kaminari
+  language_list
   listen (>= 3.0.5, < 3.2)
   meta-tags
   newrelic_rpm

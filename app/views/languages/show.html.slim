@@ -1,0 +1,36 @@
+.columns.is-marginless
+  .column
+    h1.title.is-2
+      = @language.name
+
+  .column
+    .level
+      .level-item.has-text-centered
+        div
+          p.heading Toots
+          p.title = @toots.count
+
+      .level-item.has-text-centered
+        div
+          p.heading Tags
+          p.title = @tags.total_count
+
+      .level-item.has-text-centered
+        div
+          p.heading Instances
+          p.title = @instances.count
+
+hr
+
+- if @tags.current_page == 1
+  h2.is-4.title.has-text-centered Trends
+  h3.subtitle.has-text-centered Toots creation over time
+  = area_chart @toots.where('created_at >= ?', DateTime.now - 20.hours).group_by_hour(:created_at).count
+  hr
+
+h2.is-4.title.has-text-centered Most popular tags
+
+- @tags.each do |tag|
+  = render partial: 'tags/tag', locals: { tag: tag }
+
+= paginate @tags

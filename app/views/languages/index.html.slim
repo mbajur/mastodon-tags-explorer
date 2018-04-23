@@ -1,0 +1,18 @@
+- @languages.each_with_index do |language, index|
+  a.box(href=language_path(id: language[:name] || 'none'))
+    .columns
+      .column.is-1
+        = "##{index + 1}"
+
+      .column
+        h3.title.is-4
+          = language_info_from_code(language[:name]).try(:name)
+        .subtitle
+          = "#{language[:info].iso_639_3} (#{language[:info].iso_639_1})"
+
+      .column.is-2
+        .level
+          .level-item.has-text-right
+            div
+              p.heading Toots
+              p.title = language[:count]
