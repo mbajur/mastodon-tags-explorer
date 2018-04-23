@@ -15,11 +15,12 @@ class LanguagesController < ApplicationController
     @toots = Toot.where(language: params[:id])
     @language = LanguageList::LanguageInfo.find(params[:id])
 
-    @page_title = "#{@language.name}"
+    @page_title = @language.name
     @page_description = "#{@language.name} language statsu on Mastodon Tags Explorer"
 
-    @tags = Gutentag::Tag.joins(:taggings)
-                         .where('gutentag_taggings.taggable_id IN (?)', Toot.where(language: params[:id]).map(&:id))
+    @tags = Gutentag::Tag.joins('INNER JOIN gutentag_taggings ON gutentag_tags.id = gutentag_taggings.tag_id')
+                         .joins('INNER JOIN toots ON gutentag_taggings.taggable_id = toots.id')
+                         .where('toots.language = ?', params[:id])
                          .order(taggings_count: :desc)
                          .distinct
                          .page(params[:page])
