@@ -3,7 +3,7 @@ class TagsController < ApplicationController
     @page_title = 'Trending tags'
     @tags = TrendingTag.order_by_popularity
                        .where('count_all > 0')
-                       .where('count_recent > 10')
+                       .where('count_recent > ?', ENV.fetch('MIN_COUNT_RECENT_FOR_TRENDING', 6))
                        .first(25)
   end
 
