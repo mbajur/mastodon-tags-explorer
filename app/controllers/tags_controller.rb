@@ -29,7 +29,7 @@ class TagsController < ApplicationController
                          .order(name: :asc)
                          .page(params[:page])
 
-    @tags = @tags.where('name LIKE ?', "%#{params[:q].downcase}%") if params[:q]
+    @tags = apply_search(@tags)
 
     render :index
   end
@@ -48,5 +48,14 @@ class TagsController < ApplicationController
                          .order('COUNT(gutentag_tags.id) DESC')
                          .where('gutentag_tags.name = ?', @tag.name)
                          .limit(6)
+  end
+
+  private
+
+  def apply_search(tags)
+    return tags if !params[:q].present?
+
+    query = params[:q].delete('#').downcase
+    tags.where('name LIKE ?', "%#{query}%")
   end
 end
