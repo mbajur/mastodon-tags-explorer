@@ -1,5 +1,7 @@
 class TrendingTag < ActiveRecord::Base
-  scope :order_by_popularity, -> { order('count_current - count_old DESC') }
+  self.primary_key = "id"
+
+  scope :order_by_popularity, -> { order('count_recent / count_all DESC') }
 
   def readonly?
     true

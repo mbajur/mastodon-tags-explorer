@@ -21,4 +21,9 @@ h1.title Known tags
 - @tags.each do |tag|
   = render partial: 'tags/tag', locals: { tag: tag }
 
+- if @tags.empty?
+  .box.has-text-centered.py-2
+    h2.title.is-4 No tags to show
+    p There are currently no tags to show for given filters. Please check back later.
+
 = paginate @tags if defined? @tags.total_pages
