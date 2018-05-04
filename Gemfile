@@ -50,6 +50,7 @@ gem 'active_link_to'
 gem 'google-analytics-turbolinks'
 gem 'meta-tags'
 gem 'language_list'
+gem 'faye'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
