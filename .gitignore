@@ -32,3 +32,4 @@ yarn-debug.log*
 
 .env.production
 dump.rdb
+docker-compose.yml
