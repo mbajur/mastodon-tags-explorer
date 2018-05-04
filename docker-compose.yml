@@ -42,7 +42,7 @@ services:
     restart: always
     env_file: .env.production
     entrypoint: ''
-    command: yarn start
+    command: ruby listener.rb
     networks:
       - external_network
       - internal_network
