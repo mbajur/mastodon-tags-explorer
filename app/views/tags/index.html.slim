@@ -18,8 +18,9 @@ h1.title Known tags
           p.control
             button.button Search
 
+/ = debug @tags
 - @tags.each do |tag|
-  = render partial: 'tags/tag', locals: { tag: tag }
+  = render partial: 'tags/tag', locals: { tag: tag.respond_to?(:record) ? tag.record : tag }
 
 - if @tags.empty?
   .box.has-text-centered.py-2

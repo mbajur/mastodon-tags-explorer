@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_04_174400) do
+ActiveRecord::Schema.define(version: 2018_05_11_190805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,27 +54,4 @@ ActiveRecord::Schema.define(version: 2018_05_04_174400) do
   end
 
   add_foreign_key "toots", "instances"
-
-  create_view "trending_tags", materialized: true,  sql_definition: <<-SQL
-      SELECT parent_tags.id,
-      parent_tags.name,
-      parent_tags.created_at,
-      parent_tags.updated_at,
-      parent_tags.taggings_count,
-      parent_tags.instances_count,
-      ( SELECT count(*) AS count
-             FROM toots
-            WHERE ((toots.id IN ( SELECT gutentag_taggings.taggable_id
-                     FROM (gutentag_taggings
-                       JOIN gutentag_tags ON ((gutentag_tags.id = gutentag_taggings.tag_id)))
-                    WHERE (((gutentag_taggings.taggable_type)::text = 'Toot'::text) AND ((gutentag_tags.name)::text = (parent_tags.name)::text)))) AND (toots.created_at >= (timezone('UTC'::text, now()) - '14 days'::interval)))) AS count_all,
-      ( SELECT count(*) AS count
-             FROM toots
-            WHERE ((toots.id IN ( SELECT gutentag_taggings.taggable_id
-                     FROM (gutentag_taggings
-                       JOIN gutentag_tags ON ((gutentag_tags.id = gutentag_taggings.tag_id)))
-                    WHERE (((gutentag_taggings.taggable_type)::text = 'Toot'::text) AND ((gutentag_tags.name)::text = (parent_tags.name)::text)))) AND (toots.created_at >= (timezone('UTC'::text, now()) - '01:00:00'::interval)))) AS count_recent
-     FROM gutentag_tags parent_tags;
-  SQL
-
 end

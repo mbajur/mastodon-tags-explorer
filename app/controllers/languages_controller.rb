@@ -1,14 +1,18 @@
 class LanguagesController < ApplicationController
   def index
-    @page_title = 'Languages'
-    @page_description = 'Languages used on Mastodon Tags Explorer'
+    @page_title = 'Trending languages'
+    @page_description = 'Languages trending on Mastodon Tags Explorer'
 
-    @languages = Toot.all
-                     .group(:language)
-                     .count
-                     .map { |l| { name: l[0], info: LanguageList::LanguageInfo.find(l[0]), count: l[1] } }
-                     .reject { |l| !l[:info].present? }
-                     .sort { |a, b| b[:count] <=> a[:count] }
+    @languages = LanguagesQuery.new.trending.buckets
+  end
+
+  def popular
+    @page_title = 'Popular languages'
+    @page_description = 'Languages popular on Mastodon Tags Explorer'
+
+    @languages = LanguagesQuery.new.popular
+
+    render :index
   end
 
   def show

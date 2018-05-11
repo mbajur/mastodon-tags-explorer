@@ -19,6 +19,17 @@ services:
 #    volumes:
 #      - ./redis:/data
 
+  es:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.3
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - internal_network
+#### Uncomment to enable ES persistance
+##    volumes:
+##      - ./elasticsearch:/usr/share/elasticsearch/data
+
   web:
     build: .
     restart: always
@@ -32,6 +43,7 @@ services:
     depends_on:
       - db
       - redis
+      - es
     volumes:
       - ./public/assets:/app/public/assets
       - ./public/packs:/app/public/packs
@@ -42,7 +54,7 @@ services:
     restart: always
     env_file: .env.production
     entrypoint: ''
-    command: ruby listener.rb
+    command: bundle exec ruby listener.rb
     networks:
       - external_network
       - internal_network
@@ -58,6 +70,7 @@ services:
     depends_on:
       - db
       - redis
+      - es
     networks:
       - external_network
       - internal_network

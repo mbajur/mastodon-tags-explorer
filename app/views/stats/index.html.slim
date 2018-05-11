@@ -26,18 +26,18 @@ hr
 .has-text-centered.mb-2
   p.subtitle Tags processed
 
-= area_chart Gutentag::Tag.all.group_by_day(:created_at, format: "%a").count
+= area_chart Gutentag::Tag.all.where('created_at >= ?', DateTime.now - 7.days).group_by_day(:created_at).count
 
 hr
 
 .has-text-centered.mb-2
   p.subtitle Toots processed
 
-= area_chart Toot.all.group_by_day(:created_at, format: "%a").count
+= area_chart Toot.all.where('created_at >= ?', DateTime.now - 7.days).group_by_day(:created_at).count
 
 hr
 
 .has-text-centered.mb-2
   p.subtitle New instances
 
-= area_chart Instance.all.group_by_day(:created_at, format: "%a").count
+= area_chart Instance.all.where('created_at >= ?', DateTime.now - 7.days).group_by_day(:created_at).count

@@ -3,7 +3,6 @@ class Gutentag::Tagging < ActiveRecord::Base
 
   belongs_to :taggable, :polymorphic => true
   belongs_to :tag, :class_name => "Gutentag::Tag", :counter_cache => true
-  belongs_to :trending_tag, foreign_key: :tag_id, optional: true
 
   validates :taggable, :presence => true
   validates :tag,      :presence => true

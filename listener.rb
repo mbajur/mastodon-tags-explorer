@@ -15,7 +15,7 @@ def start_listener(host)
   listener = @listeners[host.to_sym]
   listener = Faye::WebSocket::Client.new('wss://mastodon.social/api/v1/streaming/?stream=public')
 
-  listener.on :open do |event|
+  listener.on :open do
     $logger.info [:open, "Listening on #{host}"]
   end
 
@@ -31,6 +31,7 @@ def start_listener(host)
   listener.on :close do |event|
     $logger.info [:close, event.code, event.reason]
     listener = nil
+    raise "#{host} connection closed"
   end
 end
 
@@ -61,10 +62,10 @@ def handle_update_event(data)
     created_at: Time.now.to_f,
     enqueued_at: Time.now.to_f
   }
-  $redis.lpush("queue:default", JSON.dump(msg))
+  $redis.lpush('queue:default', JSON.dump(msg))
 
   $logger.info [:message, toot]
-  $logger.debug "--------------------------"
+  $logger.debug '--------------------------'
 end
 
 def handle_delete_event(data)

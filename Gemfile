@@ -39,18 +39,19 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'gutentag', '~> 2.3'
 gem 'sidekiq'
-gem 'sidekiq-scheduler'
 gem 'slim-rails'
 gem 'kaminari'
 gem 'chartkick'
 gem 'groupdate'
-gem 'scenic'
 gem 'pg_search'
 gem 'active_link_to'
 gem 'google-analytics-turbolinks'
 gem 'meta-tags'
 gem 'language_list'
 gem 'faye'
+gem 'hashie'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -70,7 +71,6 @@ group :production do
   gem 'sentry-raven'
   gem 'newrelic_rpm'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
