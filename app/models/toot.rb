@@ -7,7 +7,6 @@ class Toot < ApplicationRecord
   Gutentag::ActiveRecord.call self
 
   belongs_to :instance
-  has_many :trending_tags, through: :taggings
 
   after_save    { IndexerWorker.perform_async(:index,  id) }
   after_destroy { IndexerWorker.perform_async(:delete, id) }

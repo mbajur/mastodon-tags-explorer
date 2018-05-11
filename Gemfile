@@ -39,7 +39,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'gutentag', '~> 2.3'
 gem 'sidekiq'
-gem 'sidekiq-scheduler'
 gem 'slim-rails'
 gem 'kaminari'
 gem 'chartkick'
