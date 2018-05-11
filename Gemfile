@@ -49,9 +49,7 @@ gem 'google-analytics-turbolinks'
 gem 'meta-tags'
 gem 'language_list'
 gem 'faye'
-gem 'elasticsearch'
 gem 'hashie'
-
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 

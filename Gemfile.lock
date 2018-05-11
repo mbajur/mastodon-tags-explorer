@@ -269,7 +269,6 @@ DEPENDENCIES
   byebug
   chartkick
   coffee-rails (~> 4.2)
-  elasticsearch
   elasticsearch-model
   elasticsearch-rails
   faye
