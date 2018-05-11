@@ -1,18 +1,34 @@
+.level
+  .level-left
+    .tabs
+      ul
+        = active_link_to 'Trending', languages_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+        = active_link_to 'Popular', popular_languages_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+
 - @languages.each_with_index do |language, index|
-  a.box(href=language_path(id: language[:name] || 'none'))
-    .columns
-      .column.is-1
-        = "##{index + 1}"
+  - if language.respond_to?(:record)
+    = render partial: 'languages/language', locals: { index: index + 1,
+                                                      info: language.record,
+                                                      meta: [{ label: 'Score', number: language.score.round(3) }] }
+  - else
+    = render partial: 'languages/language', locals: { index: index + 1,
+                                                      info: language[:info],
+                                                      meta: [{ label: 'Toots', number: language[:count] }] }
 
-      .column
-        h3.title.is-4
-          = language_info_from_code(language[:name]).try(:name)
-        .subtitle
-          = "#{language[:info].iso_639_3} (#{language[:info].iso_639_1})"
+  / a.box(href=language_path(id: language.name || 'none'))
+  /   .columns
+  /     .column.is-1
+  /       = "##{index + 1}"
 
-      .column.is-2
-        .level
-          .level-item.has-text-right
-            div
-              p.heading Toots
-              p.title = language[:count]
+  /     .column
+  /       h3.title.is-4
+  /         = language_info_from_code(language.name).try(:name)
+  /       .subtitle
+  /         = "#{language.iso_639_3} (#{language.iso_639_1})"
+
+  /     .column.is-2
+  /       .level
+  /         .level-item.has-text-right
+  /           div
+  /             p.heading Toots
+  /             p.title = language[:count]

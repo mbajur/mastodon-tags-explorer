@@ -1,24 +1,26 @@
 class InstancesController < ApplicationController
   def index
+    @page_title = 'Trending instances'
+
+    instances = InstancesQuery.new.trending
+    @instances = instances.buckets
+  end
+
+  def popular
     @page_title = 'Popular instances'
 
-    @instances = Instance.all
-                         .left_joins(:tags)
-                         .group(:id)
-                         .order('COUNT(gutentag_tags.id) DESC')
+    @instances = InstancesQuery.new.popular.page(params[:page]).per(26)
 
-    @instances = @instances.page(params[:page]).per(26)
+    render :index
   end
 
   def alphabetical
     @page_title = 'All instances'
 
-    @instances = Instance.all
-                         .order(host: :asc)
+    instances = InstancesQuery.new.alphabetical
+    instances = InstancesQuery.new(instances).search(params[:q]) if params[:q].present?
 
-    @instances = @instances.search(params[:q]) if params[:q].present?
-
-    @instances = @instances.page(params[:page]).per(26)
+    @instances = instances.page(params[:page]).per(26)
 
     render :index
   end

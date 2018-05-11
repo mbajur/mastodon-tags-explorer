@@ -4,7 +4,8 @@ h1.title Known instances
   .level-left
     .tabs
       ul
-        = active_link_to 'Popular', instances_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+        = active_link_to 'Trending', instances_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
+        = active_link_to 'Popular', popular_instances_path, class_active: 'is-active', wrap_tag: :li, active: :exclusive
         = active_link_to 'Alphabetical', alphabetical_instances_path, class_active: 'is-active', wrap_tag: :li
 
   .level-right
@@ -20,6 +21,6 @@ h1.title Known instances
   .columns
     - chunk.each do |instance|
       .column
-        = render instance
+        = render partial: 'instances/instance', locals: { instance: instance.respond_to?(:record) ? instance.record : instance }
 
-= paginate @instances
+= paginate @instances if defined? @instances.total_pages

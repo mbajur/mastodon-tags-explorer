@@ -1,0 +1,20 @@
+- meta ||= []
+
+a.box(href=language_path(info.iso_639_1))
+  .columns
+    .column.is-1
+      = "##{index}"
+
+    .column
+      h3.title.is-4
+        = language_info_from_code(info.name).try(:name)
+      .subtitle
+        = "#{info.iso_639_3} (#{info.iso_639_1})"
+
+    .column.is-2
+      .level
+        - meta.each do |m|
+          .level-item.has-text-right
+            div
+              p.heading = m[:label]
+              p.title = m[:number]

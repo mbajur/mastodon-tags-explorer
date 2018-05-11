@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   end
 
   resources :instances, constraints: { id: /.*/ } do
+    get :popular, on: :collection
     get :alphabetical, on: :collection
   end
 
-  resources :languages, only: [:index, :show]
+  resources :languages, only: [:index, :show] do
+    get :popular, on: :collection
+  end
 end
