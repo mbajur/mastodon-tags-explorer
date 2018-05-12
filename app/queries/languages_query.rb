@@ -4,7 +4,7 @@ class LanguagesQuery < BaseQuery
       query: {
         range: {
           created_at: {
-            gte: 'now-2h'
+            gte: 'now-6h'
           }
         }
       },
