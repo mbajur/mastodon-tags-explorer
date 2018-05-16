@@ -47,6 +47,15 @@ class TagsQuery < BaseQuery
     relation.where('name LIKE ?', "%#{query}%")
   end
 
+  def for_language(code)
+    relation
+      .joins('INNER JOIN gutentag_taggings ON gutentag_tags.id = gutentag_taggings.tag_id')
+      .joins('INNER JOIN toots ON gutentag_taggings.taggable_id = toots.id')
+      .where('toots.language = ?', code)
+      .order(taggings_count: :desc)
+      .distinct
+  end
+
   private
 
   def default_relation

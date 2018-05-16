@@ -45,6 +45,13 @@ class InstancesQuery < BaseQuery
     relation.search(query)
   end
 
+  def for_language(code)
+    relation
+      .joins(:toots)
+      .where('toots.language = ?', code)
+      .distinct
+  end
+
   private
 
   def default_relation

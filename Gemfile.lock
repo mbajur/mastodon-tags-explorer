@@ -106,6 +106,10 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-analytics-turbolinks (0.0.5)
+    graphiql-rails (1.4.10)
+      railties
+      sprockets-rails
+    graphql (1.7.14)
     groupdate (4.0.0)
       activesupport (>= 4.2)
     gutentag (2.3.1)
@@ -273,6 +277,8 @@ DEPENDENCIES
   elasticsearch-rails
   faye
   google-analytics-turbolinks
+  graphiql-rails
+  graphql
   groupdate
   gutentag (~> 2.3)
   hashie
