@@ -52,6 +52,11 @@ gem 'faye'
 gem 'hashie'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'graphql'
+gem 'search_object'
+gem 'search_object_graphql'
+gem 'rack-attack'
+gem 'graphiql-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -106,6 +106,10 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-analytics-turbolinks (0.0.5)
+    graphiql-rails (1.4.10)
+      railties
+      sprockets-rails
+    graphql (1.7.14)
     groupdate (4.0.0)
       activesupport (>= 4.2)
     gutentag (2.3.1)
@@ -163,6 +167,8 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.4)
+    rack-attack (5.2.0)
+      rack
     rack-protection (2.0.1)
       rack
     rack-proxy (0.6.4)
@@ -210,6 +216,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    search_object (1.2.0)
+    search_object_graphql (0.1)
+      graphql (~> 1.5)
+      search_object (~> 1.2)
     sentry-raven (2.7.2)
       faraday (>= 0.7.6, < 1.0)
     sidekiq (5.1.1)
@@ -273,6 +283,8 @@ DEPENDENCIES
   elasticsearch-rails
   faye
   google-analytics-turbolinks
+  graphiql-rails
+  graphql
   groupdate
   gutentag (~> 2.3)
   hashie
@@ -285,8 +297,11 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pg_search
   puma (~> 3.11)
+  rack-attack
   rails (~> 5.2.0)
   sass-rails (~> 5.0)
+  search_object
+  search_object_graphql
   sentry-raven
   sidekiq
   slim-rails

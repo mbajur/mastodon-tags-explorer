@@ -35,6 +35,7 @@ class LanguagesQuery < BaseQuery
       .map { |l| { name: l[0], info: LanguageList::LanguageInfo.find(l[0]), count: l[1] } }
       .reject { |l| !l[:info].present? }
       .sort { |a, b| b[:count] <=> a[:count] }
+      .map { |l| Hashie::Mash.new(l) }
   end
 
   private
