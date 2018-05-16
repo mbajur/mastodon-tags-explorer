@@ -7,7 +7,9 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :instanceByHost, Fields::InstanceByHostField
   field :languageByCode, Fields::LanguageByCodeField
 
-  connection :tags, Fields::TagsField
-  connection :instances, Fields::InstancesField
+  field :rateLimit, Fields::RateLimitField
+
+  connection :tags, function: Resolvers::TagsResolver
+  connection :instances, function: Resolvers::InstancesResolver
   connection :languages, Fields::LanguagesField
 end

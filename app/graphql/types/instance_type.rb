@@ -4,5 +4,5 @@ Types::InstanceType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :host, types.String
 
-  connection :tags, Fields::TagsField
+  connection :tags, function: Resolvers::TagsResolver
 end

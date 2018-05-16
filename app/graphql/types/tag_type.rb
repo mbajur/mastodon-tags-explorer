@@ -5,4 +5,6 @@ Types::TagType = GraphQL::ObjectType.define do
   field :name, types.String
   field :taggingsCount, types.Int, property: :taggings_count
   field :instancesCount, types.Int, property: :instances_count
+
+  connection :instances, function: Resolvers::TagInstancesResolver
 end

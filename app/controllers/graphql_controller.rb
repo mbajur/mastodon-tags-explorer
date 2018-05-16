@@ -4,6 +4,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
+      throttle_data: request.env['rack.attack.throttle_data']
       # Query context goes here, for example:
       # current_user: current_user,
     }
